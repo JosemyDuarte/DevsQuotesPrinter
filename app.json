@@ -1,0 +1,10 @@
+{
+  "name": "DevsQuotes Printer",
+  "description": "Quote image generator",
+  "repository": "https://github.com/JosemyDuarte/DevTopicsPrinter",
+  "logo": "https://raw.githubusercontent.com/JosemyDuarte/DevTopicsPrinter/master/.github/DevsQuotes-logo-black.png",
+  "keywords": [
+    "go",
+    "image"
+  ]
+}
