@@ -6,21 +6,11 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/josemyduarte/printer"
+	"github.com/josemyduarte/printer/internal/handler"
 )
 
-var assets printer.Assets
-
-func init() {
-	assets = printer.Assets{
-		BgImgPath: "assets/00-instagram-background.png",
-		FontPath:  "assets/FiraSans-Light.ttf",
-		FontSize:  60,
-	}
-}
-
 func main() {
-	http.HandleFunc("/", assets.Serve)
+	http.HandleFunc("/", handler.Serve)
 
 	addr := determineListenAddress()
 	log.Printf("Listening on %s...\n", addr)

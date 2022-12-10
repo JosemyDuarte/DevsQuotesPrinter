@@ -7,8 +7,15 @@ import (
 	"github.com/fogleman/gg"
 )
 
-//TextOnImg given a path to an image, a font & size and a text it will return an Image with the
-//given text printed in the ~middle of the image
+type Request struct {
+	BgImgPath string
+	FontPath  string
+	FontSize  float64
+	Text      string
+}
+
+// TextOnImg given a path to an image, a font & size and a text it will return an Image with the
+// given text printed in the ~middle of the image
 func TextOnImg(request Request) (image.Image, error) {
 	bgImage, err := gg.LoadImage(request.BgImgPath)
 	if err != nil {

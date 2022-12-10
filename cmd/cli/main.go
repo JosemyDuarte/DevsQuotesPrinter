@@ -4,7 +4,7 @@ import (
 	"flag"
 	"log"
 
-	"github.com/josemyduarte/printer"
+	"github.com/josemyduarte/printer/internal/printer"
 )
 
 func main() {
