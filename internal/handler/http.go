@@ -11,15 +11,15 @@ import (
 	"github.com/josemyduarte/printer/internal/printer"
 )
 
-var (
-	BgImgPath         = "assets/00-instagram-background.png"
-	FontPath          = "assets/FiraSans-Light.ttf"
-	FontSize  float64 = 60
-)
+type HTTP struct {
+	BackgroundImgPath string
+	FontPath          string
+	FontSize          float64
+}
 
-// Serve writes on the image referenced on Assets.BgImgPath with the font set on Assets.FontPath and
-// the size Assets.FontSize the text present on the http.Request.
-func Serve(w http.ResponseWriter, r *http.Request) {
+// Handle writes on the image referenced on BackgroundImgPath with the font set on FontPath and
+// the size FontSize the text present on the http.Request.
+func (h *HTTP) Handle(w http.ResponseWriter, r *http.Request) {
 	var req struct {
 		Text string `json:"text"`
 	}
@@ -33,9 +33,9 @@ func Serve(w http.ResponseWriter, r *http.Request) {
 
 	img, err := printer.TextOnImg(
 		printer.Request{
-			BgImgPath: BgImgPath,
-			FontPath:  FontPath,
-			FontSize:  FontSize,
+			BgImgPath: h.BackgroundImgPath,
+			FontPath:  h.FontPath,
+			FontSize:  h.FontSize,
 			Text:      req.Text,
 		},
 	)
