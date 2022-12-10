@@ -11,6 +11,15 @@ build:
 		./cmd/cli && \
 		chmod +x ./dist/cli
 
+build/aws:
+	mkdir -p "functions" && \
+	go build \
+		-trimpath \
+		-ldflags "-s -w -extldflags '-static'" \
+		-o functions/aws \
+		./cmd/aws && \
+		chmod +x ./functions/aws
+
 clean:
 	rm -rf ./dist && rm cool_img.png
 

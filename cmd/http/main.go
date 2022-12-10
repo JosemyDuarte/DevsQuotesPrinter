@@ -6,28 +6,8 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/josemyduarte/printer"
+	"github.com/josemyduarte/printer/internal/handler"
 )
-
-var assets printer.Assets
-
-func init() {
-	assets = printer.Assets{
-		BgImgPath: "assets/00-instagram-background.png",
-		FontPath:  "assets/FiraSans-Light.ttf",
-		FontSize:  60,
-	}
-}
-
-func main() {
-	http.HandleFunc("/", assets.Serve)
-
-	addr := determineListenAddress()
-	log.Printf("Listening on %s...\n", addr)
-	if err := http.ListenAndServe(addr, nil); err != nil {
-		panic(err)
-	}
-}
 
 func determineListenAddress() string {
 	port := os.Getenv("PORT")
@@ -36,4 +16,20 @@ func determineListenAddress() string {
 		return ":80"
 	}
 	return ":" + port
+}
+
+func main() {
+	httpHandler := handler.HTTP{
+		BackgroundImgPath: "assets/00-instagram-background.png",
+		FontPath:          "assets/FiraSans-Light.ttf",
+		FontSize:          60,
+	}
+
+	http.HandleFunc("/", httpHandler.Handle)
+
+	addr := determineListenAddress()
+	log.Printf("Listening on %s...\n", addr)
+	if err := http.ListenAndServe(addr, nil); err != nil {
+		panic(err)
+	}
 }
